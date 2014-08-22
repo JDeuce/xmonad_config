@@ -118,6 +118,7 @@ myRestart = "pkill dzen2 ; xmonad --recompile && xmonad --restart"
 myKeys :: XConfig t -> M.Map (KeyMask, KeySym) (X ())
 myKeys (XConfig {modMask = m, terminal = term}) = M.fromList [
              ((m, xK_f),     spawn "nautilus")
+            ,((m, xK_q),     spawn myRestart)
             ,((0, xK_F11),   spawn "amixer -q sset Master 5%-")
             ,((0, xK_F12),   spawn "amixer -q sset Master 5%+")
             ,((0, xK_Print), spawn "gnome-screenshot -i")
