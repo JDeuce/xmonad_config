@@ -48,20 +48,22 @@ myTerminal      = "gnome-terminal"
 -- Define workspaces
 myWorkspaces    = ["1:shell", "2:mail", "3:web", "4:chat", "5:gimp", "6:vm", "7:qgis", "8:alt1", "9:alt2"]
 -- Dzen/Conky
-myXmonadBar = "dzen2 -y '0' -h '24' -w '1024' -ta 'l' -fg '#FFFFFF' -bg '#000000'"
-myStatusBar = "conky -c /home/jjaques/.xmonad/.conky_dzen | dzen2 -x '1024' -h '24' -ta 'r' -bg '#000000' -fg '#FFFFFF' -y '0'"
-myBitmapsDir = "/home/jjaques/.xmonad/dzen2"
+myXmonadBar     = "dzen2 -y '0' -h '24' -w '1750' -ta 'l' -fg '#FFFFFF' -bg '#000000' -xs 1"
+myLeftRightBar  = "conky -c /home/jjaques/.xmonad/conky-left-tr  | dzen2 -xs 1 -x '1750' -h '24' -ta 'r' -bg '#000000' -fg '#FFFFFF' -y '0'"
+myRightRightBar = "conky -c /home/jjaques/.xmonad/conky-right-tr | dzen2 -xs 2 -h '24' -ta 'r' -bg '#000000' -fg '#FFFFFF' -y '0'"
+myBitmapsDir    = "/home/jjaques/.xmonad/dzen2"
 --}}}
 -- Main {{{
 main = do
-    dzenLeftBar <- spawnPipe myXmonadBar
-    dzenRightBar <- spawnPipe myStatusBar
+    dzenLeftLeftBar   <- spawnPipe myXmonadBar
+    dzenLeftRightBar  <- spawnPipe myLeftRightBar
+    dzenRightRightBar <- spawnPipe myRightRightBar
     xmonad $ withUrgencyHookC dzenUrgencyHook { args = ["-bg", "red", "fg", "black", "-xs", "1", "-y", "25"] } urgencyConfig { remindWhen = Every 15 } $ defaultConfig {
         terminal            = myTerminal
       , workspaces          = myWorkspaces
       , keys                = \c -> myKeys c `M.union` keys defaultConfig c
       , modMask             = mod4Mask
-      , logHook             = myLogHook dzenLeftBar >> fadeInactiveLogHook 0xdddddddd
+      , logHook             = myLogHook dzenLeftLeftBar >> fadeInactiveLogHook 0xdddddddd
       , manageHook          = manageDocks <+> manageHook defaultConfig
       , layoutHook          = avoidStruts $ layoutHook defaultConfig
       , normalBorderColor   = colorNormalBorder
@@ -76,14 +78,14 @@ main = do
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
-        ppCurrent           =   dzenColor "#ebac54" "#000000" . pad
+        ppCurrent           =   dzenColor "#398BA6" "#000000" . pad
       , ppVisible           =   dzenColor "white" "#000000" . pad
       , ppHidden            =   dzenColor "white" "#000000" . pad
       , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#000000" . pad
       , ppUrgent            =   dzenColor "black" "red" . pad
       , ppWsSep             =   ""
       , ppSep               =   "  |  "
-      , ppLayout            =   dzenColor "#ebac54" "#000000" .
+      , ppLayout            =   dzenColor "#398BA6" "#000000" .
                                 (\x -> case x of
                                     "Tall"              ->      "Vert"
                                     "Mirror Tall"       ->      "Horiz"
@@ -97,7 +99,7 @@ myLogHook h = dynamicLogWithPP $ defaultPP
 -- Theme {{{
 -- Color names are easier to remember:
 colorNormalBorder   = "#CCCCC6"
-colorFocusedBorder  = "#fd971f"
+colorFocusedBorder  = "#FF0000"
 
 
 barFont  = "inconsolata"

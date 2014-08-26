@@ -1,0 +1,8 @@
+background no
+out_to_console yes
+out_to_x no
+# Update interval in seconds
+update_interval 1
+
+TEXT
+^fg(\#398BA6)^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S}
