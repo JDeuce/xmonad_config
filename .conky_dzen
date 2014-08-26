@@ -5,4 +5,8 @@ out_to_x no
 update_interval 1
 
 TEXT
-^i(/home/jjaques/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF)${cpu}% ^i(/home/jjaques/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% ^fg(\#ebac54) ^i(/home/jjaques/.xmonad/dzen2/volume.xbm) ^fg(\#00ffff)${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"}% ^fg(\#ebac54) ^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF) ${time %d %m %Y} ^fg(\#ebac54) ${time %R}
+^fg(\#398BA6) UPTIME: ^fg(\#FFFFFF)${uptime} \
+^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF) ${cpu}% \
+^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% \
+^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/volume.xbm) ^fg(\#ffffff)${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"}% \
+^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S}

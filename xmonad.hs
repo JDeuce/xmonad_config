@@ -48,8 +48,8 @@ myTerminal      = "gnome-terminal"
 -- Define workspaces
 myWorkspaces    = ["1:shell", "2:mail", "3:web", "4:chat", "5:gimp", "6:vm", "7:qgis", "8:alt1", "9:alt2"]
 -- Dzen/Conky
-myXmonadBar = "dzen2 -y '0' -h '24' -w '1024' -ta 'l' -fg '#FFFFFF' -bg '#1B1D1E'"
-myStatusBar = "conky -c /home/jjaques/.xmonad/.conky_dzen | dzen2 -x '1024' -h '24' -ta 'r' -bg '#1B1D1E' -fg '#FFFFFF' -y '0'"
+myXmonadBar = "dzen2 -y '0' -h '24' -w '1024' -ta 'l' -fg '#FFFFFF' -bg '#000000'"
+myStatusBar = "conky -c /home/jjaques/.xmonad/.conky_dzen | dzen2 -x '1024' -h '24' -ta 'r' -bg '#000000' -fg '#FFFFFF' -y '0'"
 myBitmapsDir = "/home/jjaques/.xmonad/dzen2"
 --}}}
 -- Main {{{
@@ -76,33 +76,26 @@ main = do
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ defaultPP
     {
-        ppCurrent           =   dzenColor "#ebac54" "#1B1D1E" . pad
-      , ppVisible           =   dzenColor "white" "#1B1D1E" . pad
-      , ppHidden            =   dzenColor "white" "#1B1D1E" . pad
-      , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#1B1D1E" . pad
+        ppCurrent           =   dzenColor "#ebac54" "#000000" . pad
+      , ppVisible           =   dzenColor "white" "#000000" . pad
+      , ppHidden            =   dzenColor "white" "#000000" . pad
+      , ppHiddenNoWindows   =   dzenColor "#7b7b7b" "#000000" . pad
       , ppUrgent            =   dzenColor "black" "red" . pad
       , ppWsSep             =   ""
       , ppSep               =   "  |  "
-      , ppLayout            =   dzenColor "#ebac54" "#1B1D1E" .
+      , ppLayout            =   dzenColor "#ebac54" "#000000" .
                                 (\x -> case x of
                                     "Tall"              ->      "Vert"
                                     "Mirror Tall"       ->      "Horiz"
                                     _                   ->      x
                                 )
-      , ppTitle             =   (" " ++) . dzenColor "white" "#1B1D1E" . dzenEscape
+      , ppTitle             =   (" " ++) . dzenColor "white" "#000000" . dzenEscape
       , ppOutput            =   hPutStrLn h
     }
 
 --}}}
 -- Theme {{{
 -- Color names are easier to remember:
-colorOrange         = "#FD971F"
-colorDarkGray       = "#1B1D1E"
-colorPink           = "#F92672"
-colorGreen          = "#A6E22E"
-colorBlue           = "#66D9EF"
-colorYellow         = "#E6DB74"
-colorWhite          = "#CCCCC6"
 colorNormalBorder   = "#CCCCC6"
 colorFocusedBorder  = "#fd971f"
 
