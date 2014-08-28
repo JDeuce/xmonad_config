@@ -76,7 +76,7 @@ main = do
 -- Hooks {{{
 --LogHook
 myLogHook :: Handle -> X ()
-myLogHook h = dynamicLogWithPP $ defaultPP
+myLogHook h = dynamicLogWithPP $ dzenPP 
     {
         ppCurrent           =   dzenColor "#398BA6" "#000000" . pad
       , ppVisible           =   dzenColor "white" "#000000" . pad
