@@ -1,4 +1,5 @@
 -- ~/.xmonad/xmonad.hs
+
 -- Imports {{{
 
 import XMonad
@@ -27,6 +28,7 @@ import Text.Printf
 -- End imports }}}
 
 -- Config {{{
+
 -- Define Terminal
 myTerminal      = "gnome-terminal"
 -- Define workspaces
@@ -37,10 +39,11 @@ myDzenSplit     = 1750 :: Int -- where the left bar split occurs (resolution dep
 myXmonadBar     = printf "dzen2 -y '0' -h '%d' -w '%d' -ta 'l' -xs 1" myDzenHeight myDzenSplit
 myLeftRightBar  = printf "conky -c /home/jjaques/.xmonad/conky-left-tr  | dzen2 -xs 1 -h '%d' -x ' %d' -ta 'r' -y '0'" myDzenHeight myDzenSplit
 myRightRightBar = printf "conky -c /home/jjaques/.xmonad/conky-right-tr | dzen2 -xs 2 -h '%d' -ta 'r' -y '0'" myDzenHeight
-myBitmapsDir    = "/home/jjaques/.xmonad/dzen2"
+
 -- End Config }}}
 
 -- Main {{{
+
 main = do
     dzenLeftLeftBar   <- spawnPipe myXmonadBar
     dzenLeftRightBar  <- spawnPipe myLeftRightBar
@@ -57,10 +60,13 @@ main = do
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
 }
+
 -- End Main }}}
 
 -- Hooks {{{
+
 -- ManageHook {{{
+
 myManageHook :: ManageHook
 myManageHook = manageDocks <+> (composeAll . concat $
     [ [resource     =? r  --> doIgnore            | r <- myIgnores]
@@ -99,7 +105,7 @@ defaultLayout = avoidStruts $ layoutHook defaultConfig
 imLayout      = avoidStruts $ withIM(1%11) (Role "buddy_list") Grid ||| defaultLayout
 floatLayout   = avoidStruts $ simpleFloat
 myLayoutHook  = onWorkspaces["4:chat"] imLayout $
-                onWorkspaces["2:mail", "6:vm"] floatLayout $
+                onWorkspaces["6:vm"] floatLayout $
                 defaultLayout
 
 -- End LayoutHook }}}
@@ -142,7 +148,7 @@ myLogHook h = dynamicLogWithPP $ dzenPP {
 -- End Hooks }}}
 
 -- Theme {{{
--- Color names are easier to remember:
+
 colorStatusFG         = "#ffffff"
 colorStatusFGActive   = "#398BA6"
 colorStatusFGUrgent   = "black"
@@ -151,9 +157,11 @@ colorStatusBGUrgent   = "red"
 colorStatusBG         = "#000000"
 colorNormalBorder     = "#CCCCC6"
 colorFocusedBorder    = "#FF0000"
+
 -- }}}
 
 -- Keys {{{
+
 myRestart :: String
 myRestart = "pkill dzen2 ; xmonad --recompile && xmonad --restart"
 
@@ -167,6 +175,7 @@ myKeys (XConfig {modMask = m, terminal = term}) = M.fromList [
             ,((0, xK_F12),           spawn "amixer -q sset Master 5%+")
             ,((0, xK_Print),         spawn "gnome-screenshot -i")
             ]
+
 -- End Keys }}}
 
 -- vim:foldmethod=marker sw=4 sts=4 ts=4 tw=0 et ai nowrap
