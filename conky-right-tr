@@ -5,13 +5,13 @@ out_to_x no
 update_interval 1
 
 TEXT
-^fg(\#\
 ${execi 10 \
     awk \
         -F: \
-        '/josh.jaques@telenium.ca/{print ( $1 > 0) ? "FF0000" : "000000" }' \
+        -v icon="^i(/home/jjaques/.xmonad/dzen2/envelope.xbm)" \
+        '/josh.jaques@telenium.ca/{fg=($1>0)?"FF0000":"000000"; print "^fg(#"fg")"icon" "$1 }' \
         /home/jjaques/.thunderbird/82rndh44.default/unread-counts
-})^i(/home/jjaques/.xmonad/dzen2/envelope.xbm) \
+} \
 ^fg(\#398BA6) UPTIME: ^fg(\#FFFFFF)${uptime} \
 ^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF) ${cpu}% \
 ^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% \
