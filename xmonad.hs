@@ -168,6 +168,7 @@ myRestart = "pkill dzen2 ; xmonad --recompile && xmonad --restart"
 myKeys :: XConfig t -> M.Map (KeyMask, KeySym) (X ())
 myKeys (XConfig {modMask = m, terminal = term}) = M.fromList [
              ((m, xK_f),             spawn "nautilus")
+            ,((m, xK_p),             spawn "dmenu_run -fn 'xft:inconsolata:size=10' -p 'Run:' -h 24")
             ,((m, xK_q),             spawn myRestart)
             ,((m, xK_l),             spawn "gnome-screensaver-command -l")
             ,((mod1Mask, xK_Tab),    windows W.focusUp >> windows W.shiftMaster)
