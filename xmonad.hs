@@ -48,6 +48,8 @@ main = do
     dzenLeftLeftBar   <- spawnPipe myXmonadBar
     dzenLeftRightBar  <- spawnPipe myLeftRightBar
     dzenRightRightBar <- spawnPipe myRightRightBar
+    autolock <- spawnPipe "xautolock -time 5 -locker 'gnome-screensaver-command -l'"
+
     xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
         terminal            = myTerminal
       , workspaces          = myWorkspaces
@@ -103,9 +105,8 @@ myDoFullFloat = doF W.focusDown <+> doFullFloat
 
 defaultLayout = avoidStruts $ layoutHook defaultConfig
 imLayout      = avoidStruts $ withIM(1%11) (Role "buddy_list") Grid ||| defaultLayout
-floatLayout   = avoidStruts $ simpleFloat
+--floatLayout   = avoidStruts $ simpleFloat
 myLayoutHook  = onWorkspaces["4:chat"] imLayout $
-                onWorkspaces["6:vm"] floatLayout $
                 defaultLayout
 
 -- End LayoutHook }}}
@@ -116,7 +117,7 @@ myStartupHook = do
     spawnOnce "gnome-terminal"
     spawnOnce "thunderbird"
     spawnOnce "google-chrome"
-    spawnOnce "pidgin"
+    --spawnOnce "pidgin"
 
 -- End StartupHook }}}
 
@@ -163,14 +164,17 @@ colorFocusedBorder    = "#FF0000"
 -- Keys {{{
 
 myRestart :: String
-myRestart = "pkill dzen2 ; xmonad --recompile && xmonad --restart"
+myRestart = "pkill dzen2 ; pkill xautolock; xmonad --recompile && xmonad --restart"
+
+myMenu :: String
+myMenu = printf "dmenu_run -fn 'xft:inconsolata:size=10' -p 'Run:' -h %d" myDzenHeight
 
 myKeys :: XConfig t -> M.Map (KeyMask, KeySym) (X ())
 myKeys (XConfig {modMask = m, terminal = term}) = M.fromList [
              ((m, xK_f),             spawn "nautilus")
-            ,((m, xK_p),             spawn "dmenu_run -fn 'xft:inconsolata:size=10' -p 'Run:' -h 24")
+            ,((m, xK_p),             spawn myMenu)
             ,((m, xK_q),             spawn myRestart)
-            ,((m, xK_l),             spawn "gnome-screensaver-command -l")
+            ,((mod1Mask, xK_l),             spawn "gnome-screensaver-command -l")
             ,((mod1Mask, xK_Tab),    windows W.focusUp >> windows W.shiftMaster)
             ,((0, xK_F11),           spawn "amixer -q sset Master 5%-")
             ,((0, xK_F12),           spawn "amixer -q sset Master 5%+")

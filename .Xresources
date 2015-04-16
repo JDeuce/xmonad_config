@@ -1,0 +1,6 @@
+dzen2.font: xft:inconsolata:size=10
+URxvt.scrollBar: false
+URxvt.font: xft:inconsolata:size=10
+URxvt.termName: screen-256color
+URxvt.background: #000000
+URxvt.foreground: #ffffff
