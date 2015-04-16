@@ -5,4 +5,6 @@ out_to_x no
 update_interval 1
 
 TEXT
-^fg(\#398BA6)^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S}
+^ca(1,/home/jjaques/.xmonad/bin/calendar_popup.sh 1) \
+^fg(\#00FF00)^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S} \
+^ca()

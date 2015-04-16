@@ -9,11 +9,13 @@ ${execi 10 \
     awk \
         -F: \
         -v icon="^i(/home/jjaques/.xmonad/dzen2/envelope.xbm)" \
-        '/josh.jaques@telenium.ca/{fg=($1>0)?"FF0000":"FFFFFF"; print "^fg(#"fg")"icon" "$1 }' \
-        /home/jjaques/.thunderbird/82rndh44.default/unread-counts
+        '/telenium.ca/{fg=($1)?"red":"green"; print "^fg("fg")"icon" ^fg()"$1 }' \
+        /home/jjaques/.thunderbird/i1xlz0pn.default/unread-counts
 } \
-^fg(\#398BA6) UPTIME: ^fg(\#FFFFFF)${uptime} \
-^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF) ${cpu}% \
-^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% \
-^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/volume.xbm) ^fg(\#ffffff)${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"}% \
-^fg(\#398BA6) ^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S}
+^fg(\#00FF00) UPTIME: ^fg(\#FFFFFF)${uptime} \
+^fg(\#00FF00) ^i(/home/jjaques/.xmonad/dzen2/cpu.xbm) ^fg(\#FFFFFF) ${cpu}% \
+^fg(\#00FF00) ^i(/home/jjaques/.xmonad/dzen2/mem.xbm) ^fg(\#FFFFFF)${memperc}% \
+^fg(\#00FF00) ^i(/home/jjaques/.xmonad/dzen2/volume.xbm) ^fg(\#ffffff)${exec amixer get Master | egrep -o "[0-9]+%" | head -1 | egrep -o "[0-9]*"}% \
+^ca(1,/home/jjaques/.xmonad/bin/calendar_popup.sh 2) \
+^fg(\#00FF00) ^i(/home/jjaques/.xmonad/dzen2/clock.xbm) ^fg(\#FFFFFF)${time %Y.%m.%d} ${time %R:%S} \
+^ca()

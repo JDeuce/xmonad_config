@@ -34,7 +34,7 @@ myTerminal      = "gnome-terminal"
 -- Define workspaces
 myWorkspaces    = ["1:shell", "2:mail", "3:web", "4:chat", "5:gimp", "6:vm", "7:qgis", "8:alt1", "9:alt2"]
 -- Dzen/Conky
-myDzenHeight    = 24 :: Int
+myDzenHeight    = 16 :: Int
 myDzenSplit     = 1750 :: Int -- where the left bar split occurs (resolution dependent)
 myXmonadBar     = printf "dzen2 -y '0' -h '%d' -w '%d' -ta 'l' -xs 1" myDzenHeight myDzenSplit
 myLeftRightBar  = printf "conky -c /home/jjaques/.xmonad/conky-left-tr  | dzen2 -xs 1 -h '%d' -x ' %d' -ta 'r' -y '0'" myDzenHeight myDzenSplit
@@ -151,9 +151,9 @@ myLogHook h = dynamicLogWithPP $ dzenPP {
 -- Theme {{{
 
 colorStatusFG         = "#ffffff"
-colorStatusFGActive   = "#398BA6"
+colorStatusFGActive   = "#00FF00"
 colorStatusFGUrgent   = "black"
-colorStatusFGInactive = "#7b7b7b"
+colorStatusFGInactive = "#aaaaaa"
 colorStatusBGUrgent   = "red"
 colorStatusBG         = "#000000"
 colorNormalBorder     = "#CCCCC6"
