@@ -14,6 +14,7 @@ import XMonad.Hooks.FadeInactive -- fadeInactiveLogHook
 
 import XMonad.Layout
 import XMonad.Layout.Grid
+import XMonad.Layout.Fullscreen
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace (onWorkspace, onWorkspaces)
 import XMonad.Layout.SimpleFloat
@@ -57,7 +58,8 @@ main = do
       , modMask             = mod4Mask
       , logHook             = myLogHook dzenLeftLeftBar >> fadeInactiveLogHook 0xdddddddd
       , manageHook          = myManageHook
-      , layoutHook          = myLayoutHook
+      , handleEventHook     = fullscreenEventHook
+      , layoutHook          = fullscreenFull myLayoutHook
       , startupHook         = myStartupHook
       , normalBorderColor   = colorNormalBorder
       , focusedBorderColor  = colorFocusedBorder
@@ -70,8 +72,11 @@ main = do
 -- ManageHook {{{
 
 myManageHook :: ManageHook
+
 myManageHook = manageDocks <+> (composeAll . concat $
-    [ [resource     =? r  --> doIgnore            | r <- myIgnores]
+    [
+      [isFullscreen       --> myDoFullFloat                       ]
+    , [resource     =? r  --> doIgnore            | r <- myIgnores]
     , [className    =? c  --> doShift  "1:shell"  | c <- myShell  ]
     , [className    =? c  --> doShift  "2:mail"   | c <- myMail   ]
     , [className    =? c  --> doShift  "3:web"    | c <- myWebs   ]
@@ -79,7 +84,6 @@ myManageHook = manageDocks <+> (composeAll . concat $
     , [className    =? c  --> doShift  "5:gimp"   | c <- myGimp   ]
     , [className    =? c  --> doShift  "6:vm"     | c <- myVM     ]
     , [className    =? c  --> doCenterFloat       | c <- myFloats ]
-    , [isFullscreen       --> myDoFullFloat                           ]
     ])
     where
         role      = stringProperty "WM_WINDOW_ROLE"
