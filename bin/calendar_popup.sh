@@ -61,6 +61,8 @@ trap "rm $FIFO; exit" SIGINT SIGTERM
                 sed -re "s/(^| )($DAY)( |$)/\1^fg(\#00FF00)\2\3^fg()/" || \
                 cat
             }
+
+        /home/jjaques/.xmonad/bin/world_clock.py
     done < $FIFO;
 
 } | \
@@ -69,7 +71,7 @@ trap "rm $FIFO; exit" SIGINT SIGTERM
     -x $(expr $RESOLUTION - $WIDTH) \
     -y $HEIGHT \
     -w $WIDTH \
-    -l 8 \
+    -l 15 \
     -fg '#ffffff' \
     -sa 'c' \
     -ta 'c' \
