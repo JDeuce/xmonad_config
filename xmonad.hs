@@ -11,6 +11,7 @@ import XMonad.Hooks.ManageDocks -- avoidStruts
 import XMonad.Hooks.DynamicLog -- dzenColor, etc
 import XMonad.Hooks.UrgencyHook -- noUrgencyHook
 import XMonad.Hooks.FadeInactive -- fadeInactiveLogHook
+import XMonad.Hooks.EwmhDesktops
 
 import XMonad.Layout
 import XMonad.Layout.Grid
@@ -51,14 +52,14 @@ main = do
     dzenRightRightBar <- spawnPipe myRightRightBar
     autolock <- spawnPipe "xautolock -time 5 -locker 'gnome-screensaver-command -l'"
 
-    xmonad $ withUrgencyHook NoUrgencyHook $ defaultConfig {
+    xmonad $ withUrgencyHook NoUrgencyHook $ ewmh defaultConfig {
         terminal            = myTerminal
       , workspaces          = myWorkspaces
       , keys                = \c -> myKeys c `M.union` keys defaultConfig c
       , modMask             = mod4Mask
       , logHook             = myLogHook dzenLeftLeftBar >> fadeInactiveLogHook 0xdddddddd
       , manageHook          = myManageHook
-      , handleEventHook     = fullscreenEventHook
+      , handleEventHook     = handleEventHook defaultConfig <+> XMonad.Hooks.EwmhDesktops.fullscreenEventHook
       , layoutHook          = fullscreenFull myLayoutHook
       , startupHook         = myStartupHook
       , normalBorderColor   = colorNormalBorder
