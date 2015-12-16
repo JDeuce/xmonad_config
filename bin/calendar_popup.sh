@@ -71,7 +71,7 @@ trap "rm $FIFO; exit" SIGINT SIGTERM
     -x $(expr $RESOLUTION - $WIDTH) \
     -y $HEIGHT \
     -w $WIDTH \
-    -l 15 \
+    -l 16 \
     -fg '#ffffff' \
     -sa 'c' \
     -ta 'c' \
