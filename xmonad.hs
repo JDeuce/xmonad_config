@@ -32,7 +32,7 @@ import Text.Printf
 -- Config {{{
 
 -- Define Terminal
-myTerminal      = "gnome-terminal"
+myTerminal      = "/home/jjaques/bin/bootstrapped_urxvt"
 -- Define workspaces
 myWorkspaces    = ["1:shell", "2:mail", "3:web", "4:chat", "5:gimp", "6:vm", "7:qgis", "8:alt1", "9:alt2"]
 -- Dzen/Conky
@@ -90,7 +90,7 @@ myManageHook = manageDocks <+> (composeAll . concat $
         role      = stringProperty "WM_WINDOW_ROLE"
         name      = stringProperty "WM_NAME"
         -- classnames
-        myShell   = ["gnome-terminal"]
+        myShell   = ["urxvt"]
         myMail    = ["Thunderbird"]
         myWebs    = ["Firefox","Google-chrome"]
         myChat    = ["Pidgin","Buddy List"]
@@ -119,7 +119,7 @@ myLayoutHook  = onWorkspaces["4:chat"] imLayout $
 -- StartupHook {{{
 
 myStartupHook = do
-    spawnOnce "gnome-terminal"
+    spawnOnce "urxvt"
     spawnOnce "thunderbird"
     spawnOnce "google-chrome"
     --spawnOnce "pidgin"
@@ -181,8 +181,8 @@ myKeys (XConfig {modMask = m, terminal = term}) = M.fromList [
             ,((m, xK_q),             spawn myRestart)
             ,((mod1Mask, xK_l),             spawn "gnome-screensaver-command -l")
             ,((mod1Mask, xK_Tab),    windows W.focusUp >> windows W.shiftMaster)
-            ,((0, xK_F11),           spawn "amixer -q sset Master 5%-")
-            ,((0, xK_F12),           spawn "amixer -q sset Master 5%+")
+            ,((m, xK_F11),           spawn "amixer -q sset Master 5%-")
+            ,((m, xK_F12),           spawn "amixer -q sset Master 5%+")
             ,((0, xK_Print),         spawn "gnome-screenshot -i")
             ]
 
